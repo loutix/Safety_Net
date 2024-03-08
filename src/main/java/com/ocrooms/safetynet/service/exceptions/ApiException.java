@@ -13,9 +13,9 @@ public class ApiException {
     private final String message;
     private final String details;
 
-    public ApiException(Exception exception, HttpStatus status) {
-        timeStamp = new Date();
-        message = exception.getMessage();
-        details = status.getReasonPhrase();
-    }
+//    public ApiException(Exception exception, HttpStatus status) {
+//        timeStamp = new Date();
+//        message = exception.getMessage();
+//        details = status.getReasonPhrase();
+//    }
 }

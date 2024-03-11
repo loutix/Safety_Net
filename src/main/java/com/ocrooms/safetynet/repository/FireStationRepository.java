@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,7 +16,8 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class FireStationRepository {
 
-    private final Set<Firestation> firestationSet = new HashSet<>();
+    private final Set<Firestation> firestationSet;
+
 
     public void initFirestationsData(Set<Firestation> firestations) {
         firestationSet.addAll(firestations);

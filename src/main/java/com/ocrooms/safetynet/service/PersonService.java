@@ -30,16 +30,17 @@ public class PersonService {
 
 
     public Person create(Person person) {
-        
+
         if (personRepository.findAny(person.getId()).isPresent()) {
             throw new ItemAlreadyExists("The person ID already exist : " + person.getId());
         } else {
-            log.info("Person created with success") ;
+            log.info("Person created with success");
             return personRepository.save(person);
         }
     }
 
     public void update(String id, Person person) {
+
 
         if (!id.equalsIgnoreCase(person.getId())) {
             throw new ItemNotFoundException("The route ID is different to @RequestBody ID");

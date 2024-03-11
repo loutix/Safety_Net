@@ -2,7 +2,6 @@ package com.ocrooms.safetynet.repository;
 
 import com.ocrooms.safetynet.entities.Firestation;
 import com.ocrooms.safetynet.entities.Person;
-import com.ocrooms.safetynet.service.JsonService;
 import com.ocrooms.safetynet.service.exceptions.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +15,17 @@ import java.util.stream.Stream;
 @Repository
 @RequiredArgsConstructor
 public class FireStationRepository {
-    private final JsonService jsonService;
+
+    private final Set<Firestation> firestationSet;
+
+
+    public void initFirestationsData(Set<Firestation> firestations) {
+        firestationSet.addAll(firestations);
+    }
 
     public Set<Firestation> getAll() {
         log.info("Enter on method getAll");
-        return jsonService.getData().getFirestations();
+        return firestationSet;
     }
 
     public Stream<Firestation> findAll() {

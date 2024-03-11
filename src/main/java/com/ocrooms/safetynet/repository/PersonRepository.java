@@ -3,7 +3,6 @@ package com.ocrooms.safetynet.repository;
 import com.ocrooms.safetynet.entities.Firestation;
 import com.ocrooms.safetynet.entities.MedicalRecord;
 import com.ocrooms.safetynet.entities.Person;
-import com.ocrooms.safetynet.service.JsonService;
 import com.ocrooms.safetynet.service.exceptions.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +17,14 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class PersonRepository {
 
-    private final JsonService jsonService;
+    private final Set<Person> personSet;
+
+    public void initPersonRecordData(Set<Person> person) {
+        personSet.addAll(person);
+    }
 
     public Set<Person> getAll() {
-        return jsonService.getData().getPersons();
+        return personSet;
     }
 
     public Stream<Person> findAll() {

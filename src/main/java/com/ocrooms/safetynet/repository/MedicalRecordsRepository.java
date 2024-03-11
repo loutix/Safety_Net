@@ -3,12 +3,12 @@ package com.ocrooms.safetynet.repository;
 import com.ocrooms.safetynet.dto.PersonDto;
 import com.ocrooms.safetynet.entities.MedicalRecord;
 import com.ocrooms.safetynet.entities.Person;
-import com.ocrooms.safetynet.service.JsonService;
 import com.ocrooms.safetynet.service.exceptions.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -18,10 +18,14 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class MedicalRecordsRepository {
 
-    private final JsonService jsonService;
+    private final Set<MedicalRecord> medicalRecordSet = new HashSet<>();
+
+    public void initMedicalRecordData(Set<MedicalRecord> medicalRecords) {
+        medicalRecordSet.addAll(medicalRecords);
+    }
 
     public Set<MedicalRecord> getAll() {
-        return jsonService.getData().getMedicalrecords();
+        return medicalRecordSet;
     }
 
     public Stream<MedicalRecord> findAll() {
@@ -63,12 +67,12 @@ public class MedicalRecordsRepository {
         }
     }
 
-    public Stream<MedicalRecord> findAllByPerson(Person person){
+    public Stream<MedicalRecord> findAllByPerson(Person person) {
         return findAll()
                 .filter(medicalrecords -> medicalrecords.getId().equals(person.getId()));
     }
 
-    public Stream<MedicalRecord> findAllByPersonDto(PersonDto personDto){
+    public Stream<MedicalRecord> findAllByPersonDto(PersonDto personDto) {
         return findAll()
                 .filter(medicalrecords -> medicalrecords.getId().equals(personDto.getId()));
     }
